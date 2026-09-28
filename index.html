@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Korona</title>
 
-<!--
-============================================================
-KORONA BROWSER
-SINGLE HTML FILE
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-IMPORTANT:
-1. Create a Supabase project.
-2. Put your Supabase Project URL below.
-3. Put your Supabase PUBLISHABLE/ANON key below.
-4. NEVER put a Supabase service_role/secret key in this file.
-
-The database/table and RLS policies are shown after the HTML.
-============================================================
--->
+<title>Korona Browser</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -29,55 +25,84 @@ html,
 body {
     margin: 0;
     padding: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
+
     background: #12020b;
+
     color: #f3cbdc;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
 }
 
+
 /* =========================================================
-   MAIN BROWSER
+   BROWSER
 ========================================================= */
 
 #browser {
+
     width: 100%;
     height: 100%;
+
     display: flex;
     flex-direction: column;
 }
 
+
 .browser-header {
+
     height: 58px;
+
     flex-shrink: 0;
 
     display: flex;
     align-items: center;
+
     gap: 14px;
 
     padding: 9px 16px;
 
     background: #210414;
-    border-bottom: 1px solid #3d0a27;
+
+    border-bottom:
+        1px solid #3d0a27;
 }
 
+
 .tab {
+
+    padding:
+        9px 20px;
+
     background: #1a0311;
-    color: #ffffff;
 
-    padding: 9px 20px;
+    border:
+        1px solid #3d0a27;
 
-    border: 1px solid #3d0a27;
     border-bottom: none;
 
-    border-radius: 8px 8px 0 0;
+    border-radius:
+        8px 8px 0 0;
+
+    color: white;
 
     font-size: 13px;
+
     white-space: nowrap;
 }
 
+
 .address-bar {
+
     flex: 1;
 
     height: 38px;
@@ -85,27 +110,34 @@ body {
     display: flex;
     align-items: center;
 
-    padding: 0 18px;
+    padding:
+        0 18px;
 
     background: #12020b;
 
-    border: 1px solid #3d0a27;
+    border:
+        1px solid #3d0a27;
+
     border-radius: 20px;
 
     color: #8c5d77;
 
-    font-size: 14px;
+    font-size: 13px;
 
     overflow: hidden;
+
     white-space: nowrap;
+
     text-overflow: ellipsis;
 }
+
 
 /* =========================================================
    CONTENT
 ========================================================= */
 
 .content {
+
     position: relative;
 
     flex: 1;
@@ -113,17 +145,22 @@ body {
     min-height: 0;
 }
 
+
 /* =========================================================
-   SETUP / AUTH
+   AUTH SCREEN
 ========================================================= */
 
 #auth-container {
+
     width: 100%;
     height: 100%;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
 
     text-align: center;
@@ -131,56 +168,73 @@ body {
     padding: 20px;
 }
 
-.logo {
-    margin-bottom: 4px;
 
-    color: #ffffff;
+.logo {
+
+    color: white;
 
     font-size: 64px;
+
     font-weight: 700;
 
     letter-spacing: -2px;
+
+    margin-bottom: 5px;
 }
 
+
 .tagline {
-    margin-bottom: 34px;
 
     color: #c99cb3;
 
     font-size: 14px;
+
+    margin-bottom: 30px;
 }
 
+
 .auth-card {
-    width: min(520px, 100%);
+
+    width:
+        min(520px, 100%);
 
     padding: 28px;
 
     background: #210414;
 
-    border: 1px solid #3d0a27;
+    border:
+        1px solid #3d0a27;
 
     border-radius: 18px;
 
     box-shadow:
-        0 20px 70px rgba(0, 0, 0, .35);
+        0 20px 70px
+        rgba(0, 0, 0, .35);
 }
+
 
 .auth-title {
-    margin-bottom: 20px;
 
-    color: #ffffff;
+    color: white;
 
     font-size: 19px;
+
     font-weight: 600;
+
+    margin-bottom: 20px;
 }
 
+
 .field {
-    margin-bottom: 14px;
+
+    margin-bottom: 15px;
 
     text-align: left;
 }
 
+
 .field label {
+
     display: block;
 
     margin-bottom: 7px;
@@ -190,78 +244,107 @@ body {
     font-size: 12px;
 }
 
+
 .field input {
+
     width: 100%;
 
     padding: 13px 15px;
 
     background: #12020b;
 
-    border: 1px solid #4a0d30;
+    border:
+        1px solid #4a0d30;
+
     border-radius: 10px;
 
     outline: none;
 
-    color: #ffffff;
+    color: white;
 
     font-size: 15px;
 }
 
+
 .field input:focus {
+
     border-color: #b52b75;
 }
 
+
 .field input::placeholder {
+
     color: #5c344c;
 }
 
-.primary-button {
-    width: 100%;
 
-    margin-top: 8px;
+.primary-button {
+
+    width: 100%;
 
     padding: 13px 18px;
 
+    margin-top: 5px;
+
     background: #3d0e28;
 
-    border: 1px solid #6b1847;
+    border:
+        1px solid #6b1847;
+
     border-radius: 10px;
 
-    color: #ffffff;
+    color: white;
 
     cursor: pointer;
 
     font-size: 14px;
+
     font-weight: 600;
 
     transition: .2s;
 }
 
+
 .primary-button:hover {
+
     background: #b52b75;
+
     border-color: #e63994;
 }
 
+
 .primary-button:disabled {
-    opacity: .55;
+
+    opacity: .5;
+
     cursor: wait;
 }
 
-#error-msg {
+
+.message {
+
     min-height: 20px;
 
     margin-top: 15px;
 
-    color: #ff4d79;
-
     font-size: 13px;
 }
 
-.success-msg {
-    color: #63d6a0 !important;
+
+.error {
+
+    color: #ff4d79;
 }
 
+
+.success {
+
+    color: #63d6a0;
+}
+
+
 .user-id {
+
     margin-top: 18px;
 
     color: #70445d;
@@ -269,15 +352,19 @@ body {
     font-size: 11px;
 }
 
+
 .user-id strong {
+
     color: #c99cb3;
 }
 
+
 /* =========================================================
-   PROTECTED IFRAME
+   PROTECTED PAGE
 ========================================================= */
 
 #protected-iframe {
+
     width: 100%;
     height: 100%;
 
@@ -286,103 +373,139 @@ body {
     border: none;
 }
 
+
 /* =========================================================
    TERMINAL BUTTON
 ========================================================= */
 
 #terminal-button {
+
     position: fixed;
 
     right: 18px;
+
     bottom: 18px;
 
-    z-index: 100;
+    z-index: 900;
 
-    display: none;
+    display: block;
 }
 
+
 .terminal-open-button {
-    padding: 10px 16px;
+
+    padding:
+        10px 16px;
 
     background: #210414;
 
-    border: 1px solid #6b1847;
+    border:
+        1px solid #6b1847;
+
     border-radius: 9px;
 
-    color: #ffffff;
+    color: white;
 
     cursor: pointer;
 
     font-size: 12px;
 }
 
+
 .terminal-open-button:hover {
+
     background: #b52b75;
 }
 
+
 /* =========================================================
-   TERMINAL
+   TERMINAL OVERLAY
 ========================================================= */
 
 #terminal-overlay {
+
     position: fixed;
 
     inset: 0;
 
-    z-index: 1000;
+    z-index: 2000;
 
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 15px;
 
-    background: rgba(4, 0, 3, .78);
+    background:
+        rgba(4, 0, 3, .82);
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+        blur(5px);
 }
 
+
 #terminal {
-    width: min(900px, 100%);
-    height: min(600px, 100%);
+
+    width:
+        min(900px, 100%);
+
+    height:
+        min(600px, 100%);
 
     display: flex;
+
     flex-direction: column;
 
     overflow: hidden;
 
     background: #080408;
 
-    border: 1px solid #4d1740;
+    border:
+        1px solid #4d1740;
+
     border-radius: 10px;
 
     box-shadow:
-        0 25px 80px rgba(0, 0, 0, .7);
+        0 25px 80px
+        rgba(0, 0, 0, .7);
 }
 
+
 .terminal-header {
+
     height: 43px;
+
     flex-shrink: 0;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding: 0 14px;
 
     background: #210414;
 
-    border-bottom: 1px solid #3d0a27;
+    border-bottom:
+        1px solid #3d0a27;
 
-    color: #ffffff;
+    color: white;
 
-    font-family: Consolas, monospace;
+    font-family:
+        Consolas,
+        monospace;
+
     font-size: 13px;
 }
 
+
 .terminal-close {
+
     background: none;
+
     border: none;
 
     color: #c99cb3;
@@ -392,7 +515,9 @@ body {
     font-size: 21px;
 }
 
+
 #terminal-output {
+
     flex: 1;
 
     overflow: auto;
@@ -401,7 +526,9 @@ body {
 
     color: #d8b5ca;
 
-    font-family: Consolas, monospace;
+    font-family:
+        Consolas,
+        monospace;
 
     font-size: 13px;
 
@@ -410,23 +537,32 @@ body {
     white-space: pre-wrap;
 }
 
+
 .terminal-input-row {
+
     display: flex;
 
     padding: 12px 16px;
 
-    border-top: 1px solid #301027;
+    border-top:
+        1px solid #301027;
 }
 
+
 .prompt {
+
     padding-right: 8px;
 
     color: #e63994;
 
-    font-family: Consolas, monospace;
+    font-family:
+        Consolas,
+        monospace;
 }
 
+
 #terminal-input {
+
     flex: 1;
 
     min-width: 0;
@@ -434,54 +570,87 @@ body {
     background: transparent;
 
     border: none;
+
     outline: none;
 
-    color: #ffffff;
+    color: white;
 
-    font-family: Consolas, monospace;
+    font-family:
+        Consolas,
+        monospace;
 
     font-size: 13px;
 }
 
+
 /* =========================================================
-   STATUS
+   MOBILE
 ========================================================= */
 
-.status-dot {
-    display: inline-block;
+@media (max-width: 600px) {
 
-    width: 7px;
-    height: 7px;
+    .browser-header {
 
-    margin-right: 6px;
+        height: 52px;
 
-    border-radius: 50%;
+        padding: 7px;
+    }
 
-    background: #63d6a0;
+    .tab {
+
+        padding:
+            8px 12px;
+
+        font-size: 11px;
+    }
+
+    .address-bar {
+
+        font-size: 11px;
+    }
+
+    .logo {
+
+        font-size: 50px;
+    }
+
+    .auth-card {
+
+        padding: 22px;
+    }
 }
 
-.status-dot.offline {
-    background: #ff4d79;
-}
 </style>
 </head>
 
+
 <body>
 
+
+<!-- ========================================================
+     BROWSER
+========================================================= -->
+
 <div id="browser">
+
 
     <!-- HEADER -->
 
     <div class="browser-header">
 
         <div class="tab">
+
             🔒 Korona Browser
+
         </div>
+
 
         <div
             class="address-bar"
             id="address-bar">
+
             korona://authentication-gate
+
         </div>
 
     </div>
@@ -491,34 +660,49 @@ body {
 
     <div class="content">
 
-        <!-- AUTH SCREEN -->
+
+        <!-- ==================================================
+             AUTHENTICATION
+        ================================================== -->
 
         <div id="auth-container">
 
+
             <div class="logo">
+
                 korona
+
             </div>
+
 
             <div
                 class="tagline"
                 id="tagline">
-                secure browser access
+
+                first-time setup
+
             </div>
 
 
-            <!-- FIRST-TIME SETUP -->
+            <!-- ==============================================
+                 SETUP
+            =============================================== -->
 
             <div
                 class="auth-card"
                 id="setup-card">
 
+
                 <div class="auth-title">
-                    First-time setup
+
+                    Create your Korona ID
+
                 </div>
+
 
                 <div class="field">
 
-                    <label for="first-name">
+                    <label>
                         First name
                     </label>
 
@@ -527,14 +711,14 @@ body {
                         type="text"
                         maxlength="40"
                         autocomplete="given-name"
-                        placeholder="Enter your first name">
+                        placeholder="First name">
 
                 </div>
 
 
                 <div class="field">
 
-                    <label for="last-name">
+                    <label>
                         Last name
                     </label>
 
@@ -543,15 +727,15 @@ body {
                         type="text"
                         maxlength="40"
                         autocomplete="family-name"
-                        placeholder="Enter your last name">
+                        placeholder="Last name">
 
                 </div>
 
 
                 <button
                     class="primary-button"
-                    id="create-user-button"
-                    onclick="createUser()">
+                    id="create-button"
+                    type="button">
 
                     Create Korona ID
 
@@ -559,36 +743,54 @@ body {
 
 
                 <div
-                    id="setup-error"
-                    class="error-msg">
+                    id="setup-message"
+                    class="message">
+
                 </div>
+
 
             </div>
 
 
-            <!-- LOGIN -->
+            <!-- ==============================================
+                 LOGIN
+            =============================================== -->
 
             <div
                 class="auth-card"
                 id="login-card"
                 style="display:none;">
 
+
                 <div class="auth-title">
+
                     Welcome back
+
                 </div>
 
+
                 <div class="user-id">
+
                     Korona ID:
-                    <strong id="login-user-id"></strong>
+
+                    <strong
+                        id="login-user-id">
+                    </strong>
+
                 </div>
+
 
                 <div
                     class="field"
                     style="margin-top:20px;">
 
-                    <label for="auth-code">
+
+                    <label>
+
                         Authentication code
+
                     </label>
+
 
                     <input
                         id="auth-code"
@@ -602,35 +804,45 @@ body {
                 <button
                     class="primary-button"
                     id="login-button"
-                    onclick="login()">
+                    type="button">
 
                     Unlock Browser
 
                 </button>
 
 
-                <div id="login-error">
+                <div
+                    id="login-message"
+                    class="message">
+
                 </div>
+
 
             </div>
 
 
-            <!-- CURRENT ID -->
+            <!-- CURRENT USER -->
 
             <div
                 class="user-id"
-                id="current-id"
+                id="current-user"
                 style="display:none;">
 
                 Korona ID:
-                <strong id="display-user-id"></strong>
+
+                <strong
+                    id="display-user-id">
+                </strong>
 
             </div>
+
 
         </div>
 
 
-        <!-- PROTECTED PAGE -->
+        <!-- ==================================================
+             PROTECTED PAGE
+        ================================================== -->
 
         <iframe
             id="protected-iframe"
@@ -639,17 +851,21 @@ body {
             allow="pointer-lock">
         </iframe>
 
+
     </div>
+
 </div>
 
 
-<!-- TERMINAL BUTTON -->
+<!-- ========================================================
+     TERMINAL BUTTON
+========================================================= -->
 
 <div id="terminal-button">
 
     <button
         class="terminal-open-button"
-        onclick="openTerminal()">
+        id="terminal-open">
 
         Terminal
 
@@ -658,21 +874,28 @@ body {
 </div>
 
 
-<!-- TERMINAL -->
+<!-- ========================================================
+     TERMINAL
+========================================================= -->
 
 <div id="terminal-overlay">
 
+
     <div id="terminal">
+
 
         <div class="terminal-header">
 
             <span>
-                korona-admin-terminal
+
+                korona-terminal
+
             </span>
+
 
             <button
                 class="terminal-close"
-                onclick="closeTerminal()">
+                id="terminal-close">
 
                 ×
 
@@ -681,585 +904,600 @@ body {
         </div>
 
 
-        <div id="terminal-output"></div>
+        <div id="terminal-output">
+
+        </div>
 
 
         <div class="terminal-input-row">
 
             <span class="prompt">
+
                 korona&gt;
+
             </span>
+
 
             <input
                 id="terminal-input"
                 autocomplete="off"
                 spellcheck="false"
-                placeholder="Type help...">
+                placeholder="Type help">
 
         </div>
+
 
     </div>
 
 </div>
 
 
+<!-- ========================================================
+     SUPABASE
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
-/*
-================================================================
-CONFIGURATION
-================================================================
 
-REPLACE THESE TWO VALUES.
-
-Supabase URL:
-https://YOUR-PROJECT.supabase.co
-
-Supabase publishable/anon key:
-Your public browser key.
-
-DO NOT USE:
-service_role
-secret key
-admin key
-
-Those must never be placed in this HTML.
-================================================================
-*/
+/* =========================================================
+   SUPABASE CONFIGURATION
+========================================================= */
 
 const SUPABASE_URL =
     "https://wlzvcbisyueopwxcgwiv.supabase.co";
 
-const SUPABASE_ANON_KEY =
+
+const SUPABASE_KEY =
     "sb_publishable_S4F7YPq8ySSXNm5BL6tiaA_cuZXLud6";
 
 
-/*
-================================================================
-PROTECTED PAGE
-================================================================
-*/
+const {
+    createClient
+} = supabase;
+
+
+const db =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const TABLE =
+    "korona_users";
+
 
 const PROTECTED_URL =
     "https://storage.googleapis.com/mathhw/practice.html";
 
 
-/*
-================================================================
-SUPABASE REST API
-================================================================
-*/
-
-const REST_URL =
-    SUPABASE_URL + "/rest/v1";
-
-
-function supabaseHeaders() {
-
-    return {
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization":
-            "Bearer " + SUPABASE_ANON_KEY,
-        "Content-Type":
-            "application/json"
-    };
-}
-
-
-/*
-================================================================
-LOCAL USER INFORMATION
-================================================================
-*/
-
-const USER_KEY =
+const LOCAL_USER =
     "korona_user";
 
-const SESSION_KEY =
-    "korona_session";
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const setupCard =
+    document.getElementById(
+        "setup-card"
+    );
 
 
-function loadLocalUser() {
+const loginCard =
+    document.getElementById(
+        "login-card"
+    );
+
+
+const setupMessage =
+    document.getElementById(
+        "setup-message"
+    );
+
+
+const loginMessage =
+    document.getElementById(
+        "login-message"
+    );
+
+
+const createButton =
+    document.getElementById(
+        "create-button"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "login-button"
+    );
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function getLocalUser() {
 
     try {
 
         const raw =
-            localStorage.getItem(USER_KEY);
+            localStorage.getItem(
+                LOCAL_USER
+            );
 
-        if (!raw) return null;
+        if (!raw) {
+
+            return null;
+
+        }
 
         return JSON.parse(raw);
 
     } catch {
 
         return null;
+
     }
+
 }
 
 
 function saveLocalUser(user) {
 
     localStorage.setItem(
-        USER_KEY,
+        LOCAL_USER,
         JSON.stringify(user)
     );
+
 }
 
 
-function makeKoronaId(firstName, lastName) {
-
-    const first =
-        firstName
-            .trim()
-            .replace(/[^a-zA-Z0-9]/g, "")
-            .toUpperCase();
-
-    const last =
-        lastName
-            .trim()
-            .replace(/[^a-zA-Z0-9]/g, "")
-            .toUpperCase();
-
-    return first + "." + last;
-}
-
-
-/*
-================================================================
-DATABASE HELPERS
-================================================================
-*/
-
-async function databaseRequest(
-    table,
-    options = {}
+function makeUserId(
+    first,
+    last
 ) {
 
-    const url =
-        REST_URL +
-        "/" +
-        table +
-        (options.query || "");
-
-    const response =
-        await fetch(
-            url,
-            {
-                method:
-                    options.method || "GET",
-
-                headers: {
-                    ...supabaseHeaders(),
-
-                    ...(options.headers || {})
-                },
-
-                body:
-                    options.body
-                        ? JSON.stringify(options.body)
-                        : undefined
-            }
-        );
-
-    const text =
-        await response.text();
-
-    let data = null;
-
-    try {
-        data =
-            text
-                ? JSON.parse(text)
-                : null;
-
-    } catch {
-
-        data = text;
-    }
+    const cleanFirst =
+        first
+            .trim()
+            .replace(
+                /[^a-zA-Z0-9]/g,
+                ""
+            )
+            .toUpperCase();
 
 
-    if (!response.ok) {
+    const cleanLast =
+        last
+            .trim()
+            .replace(
+                /[^a-zA-Z0-9]/g,
+                ""
+            )
+            .toUpperCase();
 
-        throw new Error(
-            data?.message ||
-            data?.hint ||
-            data?.error_description ||
-            "Database request failed."
-        );
-    }
 
+    return (
+        cleanFirst +
+        "." +
+        cleanLast
+    );
 
-    return data;
 }
 
 
-/*
-================================================================
-FIRST-TIME USER CREATION
-================================================================
-*/
+function showMessage(
+    element,
+    text,
+    type = "error"
+) {
+
+    element.textContent =
+        text;
+
+    element.className =
+        "message " +
+        type;
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function initialize() {
+
+    const user =
+        getLocalUser();
+
+
+    if (user) {
+
+        showLogin(
+            user
+        );
+
+    } else {
+
+        setupCard.style.display =
+            "block";
+
+        loginCard.style.display =
+            "none";
+
+    }
+
+}
+
+
+function showLogin(user) {
+
+    setupCard.style.display =
+        "none";
+
+
+    loginCard.style.display =
+        "block";
+
+
+    document.getElementById(
+        "current-user"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "display-user-id"
+    ).textContent =
+        user.id;
+
+
+    document.getElementById(
+        "login-user-id"
+    ).textContent =
+        user.id;
+
+
+    document.getElementById(
+        "tagline"
+    ).textContent =
+        "enter credentials to unlock page";
+
+}
+
+
+/* =========================================================
+   CREATE USER
+========================================================= */
 
 async function createUser() {
 
-    const firstName =
-        document
-            .getElementById("first-name")
-            .value
-            .trim();
-
-    const lastName =
-        document
-            .getElementById("last-name")
-            .value
-            .trim();
-
-    const error =
-        document
-            .getElementById("setup-error");
-
-    const button =
-        document
-            .getElementById("create-user-button");
+    const first =
+        document.getElementById(
+            "first-name"
+        ).value.trim();
 
 
-    error.textContent = "";
-    error.className = "";
+    const last =
+        document.getElementById(
+            "last-name"
+        ).value.trim();
 
 
-    if (!firstName || !lastName) {
+    showMessage(
+        setupMessage,
+        ""
+    );
 
-        error.textContent =
-            "Enter both your first and last name.";
 
-        error.style.color =
-            "#ff4d79";
+    if (!first || !last) {
+
+        showMessage(
+            setupMessage,
+            "Enter both your first and last name."
+        );
 
         return;
+
     }
 
 
-    const userId =
-        makeKoronaId(
-            firstName,
-            lastName
+    const id =
+        makeUserId(
+            first,
+            last
         );
 
 
     if (
-        userId.length < 3 ||
-        !userId.includes(".")
+        id.length < 3 ||
+        !id.includes(".")
     ) {
 
-        error.textContent =
-            "Please enter a valid first and last name.";
-
-        error.style.color =
-            "#ff4d79";
+        showMessage(
+            setupMessage,
+            "Please enter a valid first and last name."
+        );
 
         return;
+
     }
 
 
-    button.disabled = true;
+    createButton.disabled =
+        true;
 
-    button.textContent =
-        "Creating ID...";
+
+    createButton.textContent =
+        "Creating...";
 
 
     try {
 
         /*
-         * Check whether this ID already exists.
+         * Check for an existing ID.
          */
 
-        const existing =
-            await databaseRequest(
-                "korona_users",
-                {
-                    query:
-                        "?select=id,first_name,last_name,active" +
-                        "&id=eq." +
-                        encodeURIComponent(userId)
-                }
+        const {
+            data: existing,
+            error: lookupError
+        } =
+            await db
+                .from(TABLE)
+                .select("id")
+                .eq("id", id)
+                .limit(1);
+
+
+        if (lookupError) {
+
+            throw lookupError;
+
+        }
+
+
+        if (
+            existing &&
+            existing.length > 0
+        ) {
+
+            showMessage(
+                setupMessage,
+                "That Korona ID already exists. Use a different name."
             );
 
-
-        if (existing.length > 0) {
-
-            error.textContent =
-                "That Korona ID already exists. " +
-                "Use the existing ID on this device.";
-
-            error.style.color =
-                "#ff4d79";
-
             return;
+
         }
 
 
         /*
-         * Register user.
+         * Create the user.
+         *
+         * auth_code is initially blank.
+         * An administrator can assign the code
+         * through the secure admin system.
          */
 
-        const created =
-            await databaseRequest(
-                "korona_users",
-                {
-                    method: "POST",
+        const {
+            data,
+            error
+        } =
+            await db
+                .from(TABLE)
+                .insert({
+                    id: id,
 
-                    query:
-                        "?select=id,first_name,last_name,active",
+                    first_name: first,
 
-                    headers: {
-                        "Prefer":
-                            "return=representation"
-                    },
+                    last_name: last,
 
-                    body: {
-                        id: userId,
+                    auth_code: "",
 
-                        first_name:
-                            firstName,
-
-                        last_name:
-                            lastName,
-
-                        active: true
-                    }
-                }
-            );
+                    active: true
+                })
+                .select()
+                .single();
 
 
-        if (!created || !created.length) {
+        if (error) {
 
-            throw new Error(
-                "User registration failed."
-            );
+            throw error;
+
         }
 
+
+        /*
+         * Save locally.
+         */
 
         const user = {
 
-            id: userId,
+            id: data.id,
 
-            firstName: firstName,
+            firstName:
+                data.first_name,
 
-            lastName: lastName
+            lastName:
+                data.last_name
+
         };
 
 
-        saveLocalUser(user);
+        saveLocalUser(
+            user
+        );
 
 
-        /*
-         * Switch to login screen.
-         */
-
-        showLogin(user);
+        showLogin(
+            user
+        );
 
 
-    } catch (err) {
+        showMessage(
+            loginMessage,
+            "Korona ID created successfully.",
+            "success"
+        );
 
-        console.error(err);
 
-        error.textContent =
-            "Unable to create your Korona ID: " +
-            err.message;
+    } catch (error) {
 
-        error.style.color =
-            "#ff4d79";
+        console.error(
+            "Create user error:",
+            error
+        );
+
+
+        showMessage(
+            setupMessage,
+            "Could not create ID: " +
+            (
+                error.message ||
+                "Unknown error"
+            )
+        );
 
     } finally {
 
-        button.disabled = false;
+        createButton.disabled =
+            false;
 
-        button.textContent =
+        createButton.textContent =
             "Create Korona ID";
+
     }
+
 }
 
 
-/*
-================================================================
-SHOW LOGIN
-================================================================
-*/
-
-function showLogin(user) {
-
-    document
-        .getElementById("setup-card")
-        .style.display = "none";
-
-
-    document
-        .getElementById("login-card")
-        .style.display = "block";
-
-
-    document
-        .getElementById("current-id")
-        .style.display = "block";
-
-
-    document
-        .getElementById("display-user-id")
-        .textContent =
-        user.id;
-
-
-    document
-        .getElementById("login-user-id")
-        .textContent =
-        user.id;
-
-
-    document
-        .getElementById("tagline")
-        .textContent =
-        "enter credentials to unlock page";
-
-
-    setTimeout(() => {
-
-        document
-            .getElementById("auth-code")
-            .focus();
-
-    }, 100);
-}
-
-
-/*
-================================================================
-LOGIN
-================================================================
-*/
+/* =========================================================
+   LOGIN
+========================================================= */
 
 async function login() {
 
     const user =
-        loadLocalUser();
+        getLocalUser();
+
 
     if (!user) {
 
         location.reload();
 
         return;
+
     }
 
 
     const code =
-        document
-            .getElementById("auth-code")
-            .value
-            .trim();
-
-
-    const error =
-        document
-            .getElementById("login-error");
-
-
-    const button =
-        document
-            .getElementById("login-button");
-
-
-    error.textContent = "";
-
-    error.className = "";
+        document.getElementById(
+            "auth-code"
+        ).value.trim();
 
 
     if (!code) {
 
-        error.textContent =
-            "Enter your authentication code.";
-
-        error.style.color =
-            "#ff4d79";
+        showMessage(
+            loginMessage,
+            "Enter your authentication code."
+        );
 
         return;
+
     }
 
 
-    button.disabled = true;
+    loginButton.disabled =
+        true;
 
-    button.textContent =
+
+    loginButton.textContent =
         "Checking...";
 
 
     try {
 
         /*
-         * Look up this user's current
-         * authorization status.
+         * Always retrieve current status
+         * from Supabase.
+         *
+         * This means a revoked user cannot
+         * simply keep using an old browser session.
          */
 
-        const users =
-            await databaseRequest(
-                "korona_users",
-                {
-                    query:
-                        "?select=id,first_name,last_name,active,auth_code" +
-                        "&id=eq." +
-                        encodeURIComponent(user.id) +
-                        "&limit=1"
-                }
-            );
+        const {
+            data,
+            error
+        } =
+            await db
+                .from(TABLE)
+                .select(
+                    "id,first_name,last_name,auth_code,active"
+                )
+                .eq("id", user.id)
+                .limit(1)
+                .single();
 
 
-        if (!users.length) {
+        if (error) {
 
-            throw new Error(
-                "Korona ID was not found."
-            );
+            throw error;
+
         }
 
 
-        const remoteUser =
-            users[0];
+        if (!data.active) {
 
-
-        /*
-         * REMOTE REVOCATION CHECK
-         */
-
-        if (!remoteUser.active) {
-
-            error.textContent =
-                "Access revoked by administrator.";
-
-            error.style.color =
-                "#ff4d79";
+            showMessage(
+                loginMessage,
+                "Access has been revoked."
+            );
 
             return;
+
         }
 
 
-        /*
-         * Authentication code check.
-         *
-         * NOTE:
-         * For a production deployment, do NOT store
-         * plaintext authentication codes.
-         * Use a server-side authentication function.
-         */
+        if (!data.auth_code) {
+
+            showMessage(
+                loginMessage,
+                "Your account has not been assigned an authentication code yet."
+            );
+
+            return;
+
+        }
+
 
         if (
-            remoteUser.auth_code !== code
+            data.auth_code !== code
         ) {
 
-            error.textContent =
-                "Incorrect authentication code.";
+            showMessage(
+                loginMessage,
+                "Incorrect authentication code."
+            );
 
-            error.style.color =
-                "#ff4d79";
 
-            document
-                .getElementById("auth-code")
-                .value = "";
+            document.getElementById(
+                "auth-code"
+            ).value = "";
+
 
             return;
+
         }
 
 
@@ -1267,31 +1505,645 @@ async function login() {
          * Successful login.
          */
 
-        localStorage.setItem(
-            SESSION_KEY,
-            JSON.stringify({
-                userId: user.id,
-                loginTime: Date.now()
-            })
-        );
-
-
         unlockPage();
 
 
-    } catch (err) {
+    } catch (error) {
 
-        console.error(err);
+        console.error(
+            "Login error:",
+            error
+        );
 
-        error.textContent =
+
+        showMessage(
+            loginMessage,
             "Login failed: " +
-            err.message;
-
-        error.style.color =
-            "#ff4d79";
+            (
+                error.message ||
+                "Unable to contact Supabase."
+            )
+        );
 
     } finally {
 
-        button.disabled = false;
+        loginButton.disabled =
+            false;
 
-       
+        loginButton.textContent =
+            "Unlock Browser";
+
+    }
+
+}
+
+
+/* =========================================================
+   UNLOCK
+========================================================= */
+
+function unlockPage() {
+
+    document.getElementById(
+        "auth-container"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "protected-iframe"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "address-bar"
+    ).textContent =
+        PROTECTED_URL;
+
+}
+
+
+/* =========================================================
+   TERMINAL
+========================================================= */
+
+function openTerminal() {
+
+    const overlay =
+        document.getElementById(
+            "terminal-overlay"
+        );
+
+
+    overlay.style.display =
+        "flex";
+
+
+    terminalPrint(
+        "Korona Terminal"
+    );
+
+
+    terminalPrint(
+        "Type 'help' for commands."
+    );
+
+
+    document.getElementById(
+        "terminal-input"
+    ).focus();
+
+}
+
+
+function closeTerminal() {
+
+    document.getElementById(
+        "terminal-overlay"
+    ).style.display =
+        "none";
+
+}
+
+
+function terminalPrint(text) {
+
+    const output =
+        document.getElementById(
+            "terminal-output"
+        );
+
+
+    output.textContent +=
+        text + "\n";
+
+
+    output.scrollTop =
+        output.scrollHeight;
+
+}
+
+
+/* =========================================================
+   TERMINAL COMMANDS
+========================================================= */
+
+async function runCommand(command) {
+
+    const parts =
+        command
+            .trim()
+            .split(/\s+/);
+
+
+    const cmd =
+        (
+            parts[0] ||
+            ""
+        ).toLowerCase();
+
+
+    if (!cmd) {
+
+        return;
+
+    }
+
+
+    /* HELP */
+
+    if (cmd === "help") {
+
+        terminalPrint(
+`Available commands:
+
+users
+    List registered Korona IDs.
+
+user <ID>
+    Display a user's information.
+
+check <ID>
+    Check whether a user is active.
+
+revoke <ID>
+    Revoke a user's access.
+
+restore <ID>
+    Restore a user's access.
+
+close
+    Close terminal.
+
+clear
+    Clear terminal.`
+        );
+
+        return;
+
+    }
+
+
+    /* CLEAR */
+
+    if (cmd === "clear") {
+
+        document.getElementById(
+            "terminal-output"
+        ).textContent = "";
+
+        return;
+
+    }
+
+
+    /* CLOSE */
+
+    if (cmd === "close") {
+
+        closeTerminal();
+
+        return;
+
+    }
+
+
+    /* USERS */
+
+    if (cmd === "users") {
+
+        terminalPrint(
+            "Loading users..."
+        );
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await db
+                    .from(TABLE)
+                    .select(
+                        "id,first_name,last_name,active,created_at"
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            if (!data.length) {
+
+                terminalPrint(
+                    "No users registered."
+                );
+
+                return;
+
+            }
+
+
+            let output =
+                "\n";
+
+
+            for (
+                const user of data
+            ) {
+
+                output +=
+                    user.id +
+                    " | " +
+                    (
+                        user.active
+                            ? "ACTIVE"
+                            : "REVOKED"
+                    ) +
+                    " | " +
+                    user.first_name +
+                    " " +
+                    user.last_name +
+                    "\n";
+
+            }
+
+
+            terminalPrint(
+                output
+            );
+
+
+        } catch (error) {
+
+            terminalPrint(
+                "ERROR: " +
+                error.message
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /* USER */
+
+    if (cmd === "user") {
+
+        const id =
+            parts[1];
+
+
+        if (!id) {
+
+            terminalPrint(
+                "Usage: user <ID>"
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await db
+                    .from(TABLE)
+                    .select(
+                        "id,first_name,last_name,active,created_at"
+                    )
+                    .eq(
+                        "id",
+                        id
+                    )
+                    .single();
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            terminalPrint(
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            );
+
+
+        } catch (error) {
+
+            terminalPrint(
+                "ERROR: " +
+                error.message
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /* CHECK */
+
+    if (cmd === "check") {
+
+        const id =
+            parts[1];
+
+
+        if (!id) {
+
+            terminalPrint(
+                "Usage: check <ID>"
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await db
+                    .from(TABLE)
+                    .select(
+                        "id,active"
+                    )
+                    .eq(
+                        "id",
+                        id
+                    )
+                    .single();
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            terminalPrint(
+                data.id +
+                ": " +
+                (
+                    data.active
+                        ? "ACTIVE"
+                        : "REVOKED"
+                )
+            );
+
+
+        } catch (error) {
+
+            terminalPrint(
+                "ERROR: " +
+                error.message
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+     * IMPORTANT:
+     *
+     * revoke / restore intentionally go
+     * through the admin Edge Function.
+     */
+
+    if (
+        cmd === "revoke" ||
+        cmd === "restore"
+    ) {
+
+        const id =
+            parts[1];
+
+
+        if (!id) {
+
+            terminalPrint(
+                "Usage: " +
+                cmd +
+                " <ID>"
+            );
+
+            return;
+
+        }
+
+
+        terminalPrint(
+            "This command requires administrator authorization."
+        );
+
+
+        terminalPrint(
+            "Configure the Korona admin Edge Function before using " +
+            cmd +
+            "."
+        );
+
+
+        return;
+
+    }
+
+
+    terminalPrint(
+        "Unknown command. Type 'help'."
+    );
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+createButton.addEventListener(
+    "click",
+    createUser
+);
+
+
+loginButton.addEventListener(
+    "click",
+    login
+);
+
+
+document.getElementById(
+    "terminal-open"
+).addEventListener(
+    "click",
+    openTerminal
+);
+
+
+document.getElementById(
+    "terminal-close"
+).addEventListener(
+    "click",
+    closeTerminal
+);
+
+
+/* =========================================================
+   ENTER TO LOGIN
+========================================================= */
+
+document.getElementById(
+    "auth-code"
+).addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            login();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TERMINAL ENTER
+========================================================= */
+
+document.getElementById(
+    "terminal-input"
+).addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            const input =
+                event.target;
+
+
+            const command =
+                input.value;
+
+
+            terminalPrint(
+                "korona> " +
+                command
+            );
+
+
+            input.value =
+                "";
+
+
+            runCommand(
+                command
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CTRL+\
+
+   event.code is used instead of only event.key,
+   because browsers can report "\" differently
+   depending on keyboard layout.
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.ctrlKey &&
+            event.code === "Backslash"
+        ) {
+
+            event.preventDefault();
+
+            openTerminal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeTerminal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    initialize
+);
+
+</script>
+
+</body>
+</html>
