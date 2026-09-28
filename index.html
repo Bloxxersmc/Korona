@@ -3,15 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Korona Browser</title>
+<title>Korona</title>
+
+<!--
+============================================================
+KORONA BROWSER
+SINGLE HTML FILE
+
+IMPORTANT:
+1. Create a Supabase project.
+2. Put your Supabase Project URL below.
+3. Put your Supabase PUBLISHABLE/ANON key below.
+4. NEVER put a Supabase service_role/secret key in this file.
+
+The database/table and RLS policies are shown after the HTML.
+============================================================
+-->
 
 <style>
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -20,9 +37,9 @@ html, body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* =========================
-   BROWSER
-========================= */
+/* =========================================================
+   MAIN BROWSER
+========================================================= */
 
 #browser {
     width: 100%;
@@ -34,263 +51,417 @@ html, body {
 .browser-header {
     height: 58px;
     flex-shrink: 0;
-    background: #210414;
-    border-bottom: 1px solid #3d0a27;
+
     display: flex;
     align-items: center;
     gap: 14px;
+
     padding: 9px 16px;
+
+    background: #210414;
+    border-bottom: 1px solid #3d0a27;
 }
 
 .tab {
     background: #1a0311;
-    color: #fff;
+    color: #ffffff;
+
     padding: 9px 20px;
-    border-radius: 8px 8px 0 0;
-    font-size: 13px;
+
     border: 1px solid #3d0a27;
     border-bottom: none;
+
+    border-radius: 8px 8px 0 0;
+
+    font-size: 13px;
     white-space: nowrap;
 }
 
 .address-bar {
     flex: 1;
+
     height: 38px;
+
     display: flex;
     align-items: center;
+
+    padding: 0 18px;
+
     background: #12020b;
+
     border: 1px solid #3d0a27;
     border-radius: 20px;
-    padding: 0 18px;
+
     color: #8c5d77;
+
     font-size: 14px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-/* =========================
+/* =========================================================
    CONTENT
-========================= */
+========================================================= */
 
 .content {
-    flex: 1;
     position: relative;
+
+    flex: 1;
+
     min-height: 0;
 }
 
-/* =========================
-   AUTH
-========================= */
+/* =========================================================
+   SETUP / AUTH
+========================================================= */
 
 #auth-container {
     width: 100%;
     height: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     text-align: center;
+
+    padding: 20px;
 }
 
 .logo {
+    margin-bottom: 4px;
+
+    color: #ffffff;
+
     font-size: 64px;
     font-weight: 700;
+
     letter-spacing: -2px;
-    color: #fff;
-    margin-bottom: 5px;
 }
 
 .tagline {
+    margin-bottom: 34px;
+
     color: #c99cb3;
+
     font-size: 14px;
-    margin-bottom: 30px;
 }
 
-.input-wrapper {
-    width: min(550px, calc(100% - 40px));
-    display: flex;
-    align-items: center;
+.auth-card {
+    width: min(520px, 100%);
+
+    padding: 28px;
+
     background: #210414;
-    border: 1px solid #4a0d30;
-    border-radius: 30px;
-    padding: 5px 10px 5px 25px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+
+    border: 1px solid #3d0a27;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 70px rgba(0, 0, 0, .35);
 }
 
-.input-wrapper:focus-within {
-    border-color: #b52b75;
-}
+.auth-title {
+    margin-bottom: 20px;
 
-#code-input {
-    flex: 1;
-    min-width: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: white;
-    font-size: 18px;
-    padding: 10px 0;
-}
+    color: #ffffff;
 
-#code-input::placeholder {
-    color: #5c344c;
-}
-
-.submit-btn,
-.terminal-open-btn {
-    background: #3d0e28;
-    color: white;
-    border: 1px solid #6b1847;
-    border-radius: 20px;
-    cursor: pointer;
+    font-size: 19px;
     font-weight: 600;
-    transition: .2s;
 }
 
-.submit-btn {
-    padding: 10px 25px;
+.field {
+    margin-bottom: 14px;
+
+    text-align: left;
+}
+
+.field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #a87591;
+
+    font-size: 12px;
+}
+
+.field input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    background: #12020b;
+
+    border: 1px solid #4a0d30;
+    border-radius: 10px;
+
+    outline: none;
+
+    color: #ffffff;
+
     font-size: 15px;
 }
 
-.submit-btn:hover,
-.terminal-open-btn:hover {
+.field input:focus {
+    border-color: #b52b75;
+}
+
+.field input::placeholder {
+    color: #5c344c;
+}
+
+.primary-button {
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 13px 18px;
+
+    background: #3d0e28;
+
+    border: 1px solid #6b1847;
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.primary-button:hover {
     background: #b52b75;
     border-color: #e63994;
 }
 
-#error-msg {
-    color: #ff4d79;
-    margin-top: 18px;
-    min-height: 20px;
-    font-size: 14px;
+.primary-button:disabled {
+    opacity: .55;
+    cursor: wait;
 }
 
-/* =========================
-   USER ID
-========================= */
+#error-msg {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    color: #ff4d79;
+
+    font-size: 13px;
+}
+
+.success-msg {
+    color: #63d6a0 !important;
+}
 
 .user-id {
     margin-top: 18px;
+
     color: #70445d;
+
     font-size: 11px;
-    user-select: all;
 }
 
-/* =========================
-   PROTECTED PAGE
-========================= */
+.user-id strong {
+    color: #c99cb3;
+}
+
+/* =========================================================
+   PROTECTED IFRAME
+========================================================= */
 
 #protected-iframe {
     width: 100%;
     height: 100%;
-    border: none;
+
     display: none;
+
+    border: none;
 }
 
-/* =========================
+/* =========================================================
    TERMINAL BUTTON
-========================= */
+========================================================= */
 
 #terminal-button {
     position: fixed;
+
     right: 18px;
     bottom: 18px;
+
     z-index: 100;
+
     display: none;
 }
 
-.terminal-open-btn {
+.terminal-open-button {
     padding: 10px 16px;
+
+    background: #210414;
+
+    border: 1px solid #6b1847;
+    border-radius: 9px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 12px;
 }
 
-/* =========================
+.terminal-open-button:hover {
+    background: #b52b75;
+}
+
+/* =========================================================
    TERMINAL
-========================= */
+========================================================= */
 
 #terminal-overlay {
     position: fixed;
+
     inset: 0;
+
     z-index: 1000;
+
     display: none;
-    background: rgba(4, 0, 3, .75);
-    backdrop-filter: blur(5px);
+
     align-items: center;
     justify-content: center;
+
+    padding: 15px;
+
+    background: rgba(4, 0, 3, .78);
+
+    backdrop-filter: blur(5px);
 }
 
 #terminal {
-    width: min(900px, calc(100% - 30px));
-    height: min(600px, calc(100% - 30px));
-    background: #080408;
-    border: 1px solid #4d1740;
-    border-radius: 10px;
-    box-shadow: 0 25px 80px rgba(0,0,0,.7);
-    overflow: hidden;
+    width: min(900px, 100%);
+    height: min(600px, 100%);
+
     display: flex;
     flex-direction: column;
+
+    overflow: hidden;
+
+    background: #080408;
+
+    border: 1px solid #4d1740;
+    border-radius: 10px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, .7);
 }
 
 .terminal-header {
-    height: 42px;
-    background: #210414;
-    border-bottom: 1px solid #3d0a27;
+    height: 43px;
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 14px;
-    color: #fff;
+
+    background: #210414;
+
+    border-bottom: 1px solid #3d0a27;
+
+    color: #ffffff;
+
+    font-family: Consolas, monospace;
     font-size: 13px;
 }
 
 .terminal-close {
     background: none;
     border: none;
+
     color: #c99cb3;
-    font-size: 20px;
+
     cursor: pointer;
+
+    font-size: 21px;
 }
 
 #terminal-output {
     flex: 1;
+
     overflow: auto;
+
     padding: 16px;
+
     color: #d8b5ca;
+
     font-family: Consolas, monospace;
+
     font-size: 13px;
+
     line-height: 1.6;
+
     white-space: pre-wrap;
 }
 
 .terminal-input-row {
     display: flex;
+
     padding: 12px 16px;
+
     border-top: 1px solid #301027;
 }
 
 .prompt {
-    color: #e63994;
-    font-family: Consolas, monospace;
     padding-right: 8px;
+
+    color: #e63994;
+
+    font-family: Consolas, monospace;
 }
 
 #terminal-input {
     flex: 1;
+
+    min-width: 0;
+
+    background: transparent;
+
     border: none;
     outline: none;
-    background: transparent;
-    color: white;
+
+    color: #ffffff;
+
     font-family: Consolas, monospace;
+
     font-size: 13px;
 }
 
-/* =========================
-   SETUP
-========================= */
+/* =========================================================
+   STATUS
+========================================================= */
 
-#setup-note {
-    display: none;
-    max-width: 600px;
-    margin-top: 20px;
-    color: #9e7189;
-    font-size: 12px;
+.status-dot {
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    margin-right: 6px;
+
+    border-radius: 50%;
+
+    background: #63d6a0;
+}
+
+.status-dot.offline {
+    background: #ff4d79;
 }
 </style>
 </head>
@@ -299,56 +470,168 @@ html, body {
 
 <div id="browser">
 
-    <div class="browser-header">
-        <div class="tab">🔒 Korona Browser</div>
+    <!-- HEADER -->
 
-        <div class="address-bar" id="address-bar">
+    <div class="browser-header">
+
+        <div class="tab">
+            🔒 Korona Browser
+        </div>
+
+        <div
+            class="address-bar"
+            id="address-bar">
             korona://authentication-gate
         </div>
+
     </div>
+
+
+    <!-- CONTENT -->
 
     <div class="content">
 
-        <!-- AUTHENTICATION -->
+        <!-- AUTH SCREEN -->
+
         <div id="auth-container">
 
-            <div class="logo">korona</div>
-
-            <div class="tagline">
-                enter credentials to unlock page
+            <div class="logo">
+                korona
             </div>
 
-            <div class="input-wrapper">
-                <input
-                    id="code-input"
-                    type="password"
-                    autocomplete="off"
-                    placeholder="Enter Authentication Code..."
-                >
+            <div
+                class="tagline"
+                id="tagline">
+                secure browser access
+            </div>
+
+
+            <!-- FIRST-TIME SETUP -->
+
+            <div
+                class="auth-card"
+                id="setup-card">
+
+                <div class="auth-title">
+                    First-time setup
+                </div>
+
+                <div class="field">
+
+                    <label for="first-name">
+                        First name
+                    </label>
+
+                    <input
+                        id="first-name"
+                        type="text"
+                        maxlength="40"
+                        autocomplete="given-name"
+                        placeholder="Enter your first name">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="last-name">
+                        Last name
+                    </label>
+
+                    <input
+                        id="last-name"
+                        type="text"
+                        maxlength="40"
+                        autocomplete="family-name"
+                        placeholder="Enter your last name">
+
+                </div>
+
 
                 <button
-                    class="submit-btn"
-                    onclick="checkAccess()"
-                >
-                    Go →
+                    class="primary-button"
+                    id="create-user-button"
+                    onclick="createUser()">
+
+                    Create Korona ID
+
                 </button>
+
+
+                <div
+                    id="setup-error"
+                    class="error-msg">
+                </div>
+
             </div>
 
-            <div id="error-msg"></div>
 
-            <div class="user-id">
-                Your Korona ID:
+            <!-- LOGIN -->
+
+            <div
+                class="auth-card"
+                id="login-card"
+                style="display:none;">
+
+                <div class="auth-title">
+                    Welcome back
+                </div>
+
+                <div class="user-id">
+                    Korona ID:
+                    <strong id="login-user-id"></strong>
+                </div>
+
+                <div
+                    class="field"
+                    style="margin-top:20px;">
+
+                    <label for="auth-code">
+                        Authentication code
+                    </label>
+
+                    <input
+                        id="auth-code"
+                        type="password"
+                        autocomplete="off"
+                        placeholder="Enter authentication code">
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    id="login-button"
+                    onclick="login()">
+
+                    Unlock Browser
+
+                </button>
+
+
+                <div id="login-error">
+                </div>
+
+            </div>
+
+
+            <!-- CURRENT ID -->
+
+            <div
+                class="user-id"
+                id="current-id"
+                style="display:none;">
+
+                Korona ID:
                 <strong id="display-user-id"></strong>
-            </div>
 
-            <div id="setup-note">
-                Keep this ID available for the administrator.
-                It identifies this installation.
             </div>
 
         </div>
 
-        <!-- PROTECTED CONTENT -->
+
+        <!-- PROTECTED PAGE -->
+
         <iframe
             id="protected-iframe"
             src="https://storage.googleapis.com/mathhw/practice.html"
@@ -361,40 +644,58 @@ html, body {
 
 
 <!-- TERMINAL BUTTON -->
+
 <div id="terminal-button">
+
     <button
-        class="terminal-open-btn"
+        class="terminal-open-button"
         onclick="openTerminal()">
+
         Terminal
+
     </button>
+
 </div>
 
 
 <!-- TERMINAL -->
+
 <div id="terminal-overlay">
 
     <div id="terminal">
 
         <div class="terminal-header">
-            <span>korona-admin-terminal</span>
+
+            <span>
+                korona-admin-terminal
+            </span>
 
             <button
                 class="terminal-close"
                 onclick="closeTerminal()">
+
                 ×
+
             </button>
+
         </div>
+
 
         <div id="terminal-output"></div>
 
+
         <div class="terminal-input-row">
-            <span class="prompt">korona&gt;</span>
+
+            <span class="prompt">
+                korona&gt;
+            </span>
 
             <input
                 id="terminal-input"
                 autocomplete="off"
                 spellcheck="false"
-            >
+                placeholder="Type help...">
+
         </div>
 
     </div>
@@ -404,632 +705,593 @@ html, body {
 
 <script>
 /*
-=========================================================
+================================================================
 CONFIGURATION
-=========================================================
+================================================================
+
+REPLACE THESE TWO VALUES.
+
+Supabase URL:
+https://YOUR-PROJECT.supabase.co
+
+Supabase publishable/anon key:
+Your public browser key.
+
+DO NOT USE:
+service_role
+secret key
+admin key
+
+Those must never be placed in this HTML.
+================================================================
 */
 
-const CONFIG = {
+const SUPABASE_URL =
+    "https://wlzvcbisyueopwxcgwiv.supabase.co";
 
-    /*
-     * Your remote authorization API.
-     *
-     * Example:
-     *
-     * https://your-domain.com/api/korona
-     *
-     * The API should implement:
-     *
-     * GET  /users
-     * POST /check
-     * POST /revoke
-     *
-     * See the API contract below.
-     */
-    API_URL: "https://YOUR-AUTH-SERVER.example/api/korona",
-
-    /*
-     * Protected page.
-     */
-    PROTECTED_URL:
-        "https://storage.googleapis.com/mathhw/practice.html"
-};
+const SUPABASE_ANON_KEY =
+    "sb_publishable_S4F7YPq8ySSXNm5BL6tiaA_cuZXLud6";
 
 
 /*
-=========================================================
-USER ID
-=========================================================
+================================================================
+PROTECTED PAGE
+================================================================
 */
 
-const USER_ID_KEY = "korona_user_id";
-
-function generateUserId() {
-
-    if (crypto.randomUUID) {
-        return crypto.randomUUID();
-    }
-
-    return (
-        "KRN-" +
-        Date.now().toString(36) +
-        "-" +
-        Math.random().toString(36).substring(2, 10)
-    ).toUpperCase();
-}
-
-
-function getUserId() {
-
-    let id = localStorage.getItem(USER_ID_KEY);
-
-    if (!id) {
-        id = generateUserId();
-        localStorage.setItem(USER_ID_KEY, id);
-    }
-
-    return id;
-}
-
-
-const USER_ID = getUserId();
-
-document.getElementById("display-user-id").textContent = USER_ID;
+const PROTECTED_URL =
+    "https://storage.googleapis.com/mathhw/practice.html";
 
 
 /*
-=========================================================
-REMOTE ACCESS CHECK
-=========================================================
+================================================================
+SUPABASE REST API
+================================================================
 */
 
-async function checkRemoteAccess(code) {
+const REST_URL =
+    SUPABASE_URL + "/rest/v1";
 
-    const response = await fetch(
-        CONFIG.API_URL + "/check",
-        {
-            method: "POST",
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+function supabaseHeaders() {
 
-            body: JSON.stringify({
-                userId: USER_ID,
-                code: code
-            })
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error("Authorization server unavailable.");
-    }
-
-    return await response.json();
+    return {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization":
+            "Bearer " + SUPABASE_ANON_KEY,
+        "Content-Type":
+            "application/json"
+    };
 }
 
 
 /*
-=========================================================
-LOGIN
-=========================================================
+================================================================
+LOCAL USER INFORMATION
+================================================================
 */
 
-async function checkAccess() {
+const USER_KEY =
+    "korona_user";
 
-    const input = document.getElementById("code-input");
-    const error = document.getElementById("error-msg");
+const SESSION_KEY =
+    "korona_session";
 
-    const code = input.value.trim();
 
-    if (!code) {
-        error.textContent = "Enter an authentication code.";
-        return;
-    }
-
-    error.textContent = "Checking authorization...";
+function loadLocalUser() {
 
     try {
 
-        const result = await checkRemoteAccess(code);
+        const raw =
+            localStorage.getItem(USER_KEY);
 
-        if (result.authorized === true) {
+        if (!raw) return null;
 
-            localStorage.setItem(
-                "korona_session",
-                result.sessionToken || "authorized"
+        return JSON.parse(raw);
+
+    } catch {
+
+        return null;
+    }
+}
+
+
+function saveLocalUser(user) {
+
+    localStorage.setItem(
+        USER_KEY,
+        JSON.stringify(user)
+    );
+}
+
+
+function makeKoronaId(firstName, lastName) {
+
+    const first =
+        firstName
+            .trim()
+            .replace(/[^a-zA-Z0-9]/g, "")
+            .toUpperCase();
+
+    const last =
+        lastName
+            .trim()
+            .replace(/[^a-zA-Z0-9]/g, "")
+            .toUpperCase();
+
+    return first + "." + last;
+}
+
+
+/*
+================================================================
+DATABASE HELPERS
+================================================================
+*/
+
+async function databaseRequest(
+    table,
+    options = {}
+) {
+
+    const url =
+        REST_URL +
+        "/" +
+        table +
+        (options.query || "");
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:
+                    options.method || "GET",
+
+                headers: {
+                    ...supabaseHeaders(),
+
+                    ...(options.headers || {})
+                },
+
+                body:
+                    options.body
+                        ? JSON.stringify(options.body)
+                        : undefined
+            }
+        );
+
+    const text =
+        await response.text();
+
+    let data = null;
+
+    try {
+        data =
+            text
+                ? JSON.parse(text)
+                : null;
+
+    } catch {
+
+        data = text;
+    }
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            data?.message ||
+            data?.hint ||
+            data?.error_description ||
+            "Database request failed."
+        );
+    }
+
+
+    return data;
+}
+
+
+/*
+================================================================
+FIRST-TIME USER CREATION
+================================================================
+*/
+
+async function createUser() {
+
+    const firstName =
+        document
+            .getElementById("first-name")
+            .value
+            .trim();
+
+    const lastName =
+        document
+            .getElementById("last-name")
+            .value
+            .trim();
+
+    const error =
+        document
+            .getElementById("setup-error");
+
+    const button =
+        document
+            .getElementById("create-user-button");
+
+
+    error.textContent = "";
+    error.className = "";
+
+
+    if (!firstName || !lastName) {
+
+        error.textContent =
+            "Enter both your first and last name.";
+
+        error.style.color =
+            "#ff4d79";
+
+        return;
+    }
+
+
+    const userId =
+        makeKoronaId(
+            firstName,
+            lastName
+        );
+
+
+    if (
+        userId.length < 3 ||
+        !userId.includes(".")
+    ) {
+
+        error.textContent =
+            "Please enter a valid first and last name.";
+
+        error.style.color =
+            "#ff4d79";
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Creating ID...";
+
+
+    try {
+
+        /*
+         * Check whether this ID already exists.
+         */
+
+        const existing =
+            await databaseRequest(
+                "korona_users",
+                {
+                    query:
+                        "?select=id,first_name,last_name,active" +
+                        "&id=eq." +
+                        encodeURIComponent(userId)
+                }
             );
 
-            unlockPage();
 
-        } else {
+        if (existing.length > 0) {
 
             error.textContent =
-                result.message ||
-                "Access denied.";
+                "That Korona ID already exists. " +
+                "Use the existing ID on this device.";
 
-            input.value = "";
-            input.focus();
+            error.style.color =
+                "#ff4d79";
+
+            return;
         }
+
+
+        /*
+         * Register user.
+         */
+
+        const created =
+            await databaseRequest(
+                "korona_users",
+                {
+                    method: "POST",
+
+                    query:
+                        "?select=id,first_name,last_name,active",
+
+                    headers: {
+                        "Prefer":
+                            "return=representation"
+                    },
+
+                    body: {
+                        id: userId,
+
+                        first_name:
+                            firstName,
+
+                        last_name:
+                            lastName,
+
+                        active: true
+                    }
+                }
+            );
+
+
+        if (!created || !created.length) {
+
+            throw new Error(
+                "User registration failed."
+            );
+        }
+
+
+        const user = {
+
+            id: userId,
+
+            firstName: firstName,
+
+            lastName: lastName
+        };
+
+
+        saveLocalUser(user);
+
+
+        /*
+         * Switch to login screen.
+         */
+
+        showLogin(user);
+
 
     } catch (err) {
 
         console.error(err);
 
         error.textContent =
-            "Unable to contact authorization server.";
+            "Unable to create your Korona ID: " +
+            err.message;
+
+        error.style.color =
+            "#ff4d79";
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "Create Korona ID";
     }
 }
 
 
 /*
-=========================================================
-UNLOCK
-=========================================================
+================================================================
+SHOW LOGIN
+================================================================
 */
 
-function unlockPage() {
+function showLogin(user) {
 
-    document.getElementById("auth-container").style.display =
-        "none";
-
-    const iframe =
-        document.getElementById("protected-iframe");
-
-    iframe.style.display = "block";
-
-    document.getElementById("address-bar").textContent =
-        CONFIG.PROTECTED_URL;
-}
-
-
-/*
-=========================================================
-TERMINAL
-=========================================================
-*/
-
-function openTerminal() {
-
-    document.getElementById("terminal-overlay")
-        .style.display = "flex";
-
-    document.getElementById("terminal-input")
-        .focus();
-
-    terminalPrint(
-        "Korona administrative terminal\n" +
-        "Type 'help' for commands.\n"
-    );
-}
-
-
-function closeTerminal() {
-
-    document.getElementById("terminal-overlay")
+    document
+        .getElementById("setup-card")
         .style.display = "none";
-}
 
 
-function terminalPrint(text) {
-
-    const output =
-        document.getElementById("terminal-output");
-
-    output.textContent += text + "\n";
-
-    output.scrollTop = output.scrollHeight;
-}
-
-
-/*
-=========================================================
-TERMINAL COMMANDS
-=========================================================
-*/
-
-async function runTerminalCommand(command) {
-
-    const parts = command.trim().split(/\s+/);
-
-    const cmd = parts[0].toLowerCase();
-
-    if (!cmd) return;
-
-
-    if (cmd === "help") {
-
-        terminalPrint(
-`Available commands:
-
-users
-    Show registered user IDs.
-
-user <ID>
-    Show information about a user.
-
-revoke <ID>
-    Remotely revoke a user's access.
-
-restore <ID>
-    Restore a revoked user.
-
-check <ID>
-    Check whether a user is active.
-
-clear
-    Clear terminal.
-
-close
-    Close terminal.`
-        );
-
-        return;
-    }
-
-
-    if (cmd === "clear") {
-
-        document.getElementById("terminal-output")
-            .textContent = "";
-
-        return;
-    }
-
-
-    if (cmd === "close") {
-
-        closeTerminal();
-        return;
-    }
-
-
-    /*
-     * LIST USERS
-     */
-
-    if (cmd === "users") {
-
-        terminalPrint("Loading users...");
-
-        try {
-
-            const response = await fetch(
-                CONFIG.API_URL + "/users"
-            );
-
-            if (!response.ok)
-                throw new Error("Request failed.");
-
-            const data = await response.json();
-
-            if (!data.users || !data.users.length) {
-
-                terminalPrint("No users found.");
-                return;
-            }
-
-            let output = "\n";
-
-            for (const user of data.users) {
-
-                output +=
-                    `${user.id} | ` +
-                    `${user.active ? "ACTIVE" : "REVOKED"}` +
-                    (user.name ? ` | ${user.name}` : "") +
-                    "\n";
-            }
-
-            terminalPrint(output);
-
-        } catch (err) {
-
-            terminalPrint(
-                "ERROR: " + err.message
-            );
-        }
-
-        return;
-    }
-
-
-    /*
-     * USER
-     */
-
-    if (cmd === "user") {
-
-        const id = parts[1];
-
-        if (!id) {
-            terminalPrint("Usage: user <ID>");
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                CONFIG.API_URL +
-                "/users/" +
-                encodeURIComponent(id)
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-
-                terminalPrint(
-                    data.message || "User not found."
-                );
-
-                return;
-            }
-
-            terminalPrint(
-                JSON.stringify(data, null, 2)
-            );
-
-        } catch (err) {
-
-            terminalPrint(
-                "ERROR: " + err.message
-            );
-        }
-
-        return;
-    }
-
-
-    /*
-     * REVOKE
-     */
-
-    if (cmd === "revoke") {
-
-        const id = parts[1];
-
-        if (!id) {
-
-            terminalPrint(
-                "Usage: revoke <ID>"
-            );
-
-            return;
-        }
-
-        if (!confirm(
-            "Revoke access for " + id + "?"
-        )) {
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                CONFIG.API_URL + "/revoke",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        userId: id
-                    })
-                }
-            );
-
-            const data = await response.json();
-
-            terminalPrint(
-                data.message ||
-                (response.ok
-                    ? "User revoked."
-                    : "Revoke failed.")
-            );
-
-        } catch (err) {
-
-            terminalPrint(
-                "ERROR: " + err.message
-            );
-        }
-
-        return;
-    }
-
-
-    /*
-     * RESTORE
-     */
-
-    if (cmd === "restore") {
-
-        const id = parts[1];
-
-        if (!id) {
-
-            terminalPrint(
-                "Usage: restore <ID>"
-            );
-
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                CONFIG.API_URL + "/restore",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        userId: id
-                    })
-                }
-            );
-
-            const data = await response.json();
-
-            terminalPrint(
-                data.message ||
-                (response.ok
-                    ? "User restored."
-                    : "Restore failed.")
-            );
-
-        } catch (err) {
-
-            terminalPrint(
-                "ERROR: " + err.message
-            );
-        }
-
-        return;
-    }
-
-
-    /*
-     * CHECK
-     */
-
-    if (cmd === "check") {
-
-        const id = parts[1];
-
-        if (!id) {
-
-            terminalPrint(
-                "Usage: check <ID>"
-            );
-
-            return;
-        }
-
-        try {
-
-            const response = await fetch(
-                CONFIG.API_URL +
-                "/users/" +
-                encodeURIComponent(id)
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-
-                terminalPrint(
-                    "User not found."
-                );
-
-                return;
-            }
-
-            terminalPrint(
-                `${id}: ` +
-                (data.active
-                    ? "ACTIVE"
-                    : "REVOKED")
-            );
-
-        } catch (err) {
-
-            terminalPrint(
-                "ERROR: " + err.message
-            );
-        }
-
-        return;
-    }
-
-
-    terminalPrint(
-        "Unknown command. Type 'help'."
-    );
-}
-
-
-/*
-=========================================================
-KEYBOARD HANDLERS
-=========================================================
-*/
-
-document
-    .getElementById("code-input")
-    .addEventListener("keydown", event => {
-
-        if (event.key === "Enter") {
-            checkAccess();
-        }
-    });
-
-
-document
-    .getElementById("terminal-input")
-    .addEventListener("keydown", event => {
-
-        if (event.key === "Enter") {
-
-            const input = event.target;
-            const command = input.value;
-
-            terminalPrint(
-                "korona> " + command
-            );
-
-            input.value = "";
-
-            runTerminalCommand(command);
-        }
-    });
-
-
-/*
- * CTRL+\ OPENS TERMINAL
- */
-
-document.addEventListener("keydown", event => {
-
-    if (
-        event.ctrlKey &&
-        event.key === "\\"
-    ) {
-
-        event.preventDefault();
-
-        openTerminal();
-    }
-});
-
-
-/*
-=========================================================
-INITIALIZATION
-=========================================================
-*/
-
-window.addEventListener("load", () => {
-
-    document.getElementById("setup-note")
+    document
+        .getElementById("login-card")
         .style.display = "block";
 
-    /*
-     * The page deliberately does NOT automatically
-     * trust an old "authorized" localStorage value.
-     *
-     * Remote authorization should be checked whenever
-     * the user attempts to enter.
-     */
-});
-</script>
 
-</body>
-</html>
+    document
+        .getElementById("current-id")
+        .style.display = "block";
+
+
+    document
+        .getElementById("display-user-id")
+        .textContent =
+        user.id;
+
+
+    document
+        .getElementById("login-user-id")
+        .textContent =
+        user.id;
+
+
+    document
+        .getElementById("tagline")
+        .textContent =
+        "enter credentials to unlock page";
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById("auth-code")
+            .focus();
+
+    }, 100);
+}
+
+
+/*
+================================================================
+LOGIN
+================================================================
+*/
+
+async function login() {
+
+    const user =
+        loadLocalUser();
+
+    if (!user) {
+
+        location.reload();
+
+        return;
+    }
+
+
+    const code =
+        document
+            .getElementById("auth-code")
+            .value
+            .trim();
+
+
+    const error =
+        document
+            .getElementById("login-error");
+
+
+    const button =
+        document
+            .getElementById("login-button");
+
+
+    error.textContent = "";
+
+    error.className = "";
+
+
+    if (!code) {
+
+        error.textContent =
+            "Enter your authentication code.";
+
+        error.style.color =
+            "#ff4d79";
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Checking...";
+
+
+    try {
+
+        /*
+         * Look up this user's current
+         * authorization status.
+         */
+
+        const users =
+            await databaseRequest(
+                "korona_users",
+                {
+                    query:
+                        "?select=id,first_name,last_name,active,auth_code" +
+                        "&id=eq." +
+                        encodeURIComponent(user.id) +
+                        "&limit=1"
+                }
+            );
+
+
+        if (!users.length) {
+
+            throw new Error(
+                "Korona ID was not found."
+            );
+        }
+
+
+        const remoteUser =
+            users[0];
+
+
+        /*
+         * REMOTE REVOCATION CHECK
+         */
+
+        if (!remoteUser.active) {
+
+            error.textContent =
+                "Access revoked by administrator.";
+
+            error.style.color =
+                "#ff4d79";
+
+            return;
+        }
+
+
+        /*
+         * Authentication code check.
+         *
+         * NOTE:
+         * For a production deployment, do NOT store
+         * plaintext authentication codes.
+         * Use a server-side authentication function.
+         */
+
+        if (
+            remoteUser.auth_code !== code
+        ) {
+
+            error.textContent =
+                "Incorrect authentication code.";
+
+            error.style.color =
+                "#ff4d79";
+
+            document
+                .getElementById("auth-code")
+                .value = "";
+
+            return;
+        }
+
+
+        /*
+         * Successful login.
+         */
+
+        localStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify({
+                userId: user.id,
+                loginTime: Date.now()
+            })
+        );
+
+
+        unlockPage();
+
+
+    } catch (err) {
+
+        console.error(err);
+
+        error.textContent =
+            "Login failed: " +
+            err.message;
+
+        error.style.color =
+            "#ff4d79";
+
+    } finally {
+
+        button.disabled = false;
+
+       
