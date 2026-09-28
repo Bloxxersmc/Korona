@@ -1,321 +1,1035 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Korona Browser</title>
-    <style>
-        /* Base Styling to match the Korona UI */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #12020b; /* Deep Korona dark plum background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #f3cbdc;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korona Browser</title>
 
-        /* Iframe Styles */
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none; /* Hidden until authenticated */
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        /* Full layout container splits sidebar and main window */
-        #ui-wrapper {
-            display: flex;
-            width: 100%;
-            height: 100%;
-        }
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #12020b;
+    color: #f3cbdc;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        /* Sidebar Navigation UI */
-        .sidebar {
-            width: 240px;
-            background-color: #210414;
-            border-right: 1px solid #3d0a27;
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-            box-sizing: border-box;
-        }
+/* =========================
+   BROWSER
+========================= */
 
-        .brand-title {
-            font-size: 26px;
-            font-weight: bold;
-            padding-left: 30px;
-            margin-bottom: 30px;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
+#browser {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
-        .nav-item {
-            padding: 14px 30px;
-            font-size: 16px;
-            color: #c99cb3;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
+.browser-header {
+    height: 58px;
+    flex-shrink: 0;
+    background: #210414;
+    border-bottom: 1px solid #3d0a27;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 16px;
+}
 
-        .nav-item.active {
-            background-color: #3d0e28;
-            color: #ffffff;
-            border-left: 4px solid #b52b75;
-            padding-left: 26px;
-        }
+.tab {
+    background: #1a0311;
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 8px 8px 0 0;
+    font-size: 13px;
+    border: 1px solid #3d0a27;
+    border-bottom: none;
+    white-space: nowrap;
+}
 
-        .nav-item:hover:not(.active) {
-            background-color: #2d081c;
-            color: #ffffff;
-        }
+.address-bar {
+    flex: 1;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    background: #12020b;
+    border: 1px solid #3d0a27;
+    border-radius: 20px;
+    padding: 0 18px;
+    color: #8c5d77;
+    font-size: 14px;
+}
 
-        /* Main Workspace Panel */
-        .main-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: #1a0311;
-        }
+/* =========================
+   CONTENT
+========================= */
 
-        /* Mock Browser Address Bar Header */
-        .browser-header {
-            background-color: #210414;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #3d0a27;
-            gap: 15px;
-        }
+.content {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+}
 
-        .tab {
-            background-color: #1a0311;
-            color: #ffffff;
-            padding: 8px 25px;
-            border-radius: 8px 8px 0 0;
-            font-size: 13px;
-            border: 1px solid #3d0a27;
-            border-bottom: none;
-        }
+/* =========================
+   AUTH
+========================= */
 
-        .address-bar-container {
-            flex: 1;
-            background-color: #12020b;
-            border: 1px solid #3d0a27;
-            border-radius: 20px;
-            padding: 6px 20px;
-            color: #8c5d77;
-            font-size: 14px;
-        }
+#auth-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-        /* Center Content Area */
-        .content-container {
-            flex: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.logo {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 5px;
+}
 
-        /* Authentication Screen Graphic Styling */
-        #auth-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-        }
+.tagline {
+    color: #c99cb3;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
 
-        /* Stylized Main Input Area matching Korona search bar layout */
-        .logo-text {
-            font-size: 64px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 5px;
-            letter-spacing: -1px;
-        }
-        
-        .sub-tagline {
-            font-size: 14px;
-            color: #c99cb3;
-            margin-bottom: 40px;
-        }
+.input-wrapper {
+    width: min(550px, calc(100% - 40px));
+    display: flex;
+    align-items: center;
+    background: #210414;
+    border: 1px solid #4a0d30;
+    border-radius: 30px;
+    padding: 5px 10px 5px 25px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
 
-        .input-wrapper {
-            display: flex;
-            align-items: center;
-            background-color: #210414;
-            border: 1px solid #4a0d30;
-            border-radius: 30px;
-            width: 550px;
-            padding: 5px 10px 5px 25px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
+.input-wrapper:focus-within {
+    border-color: #b52b75;
+}
 
-        .input-wrapper:focus-within {
-            border-color: #b52b75;
-        }
+#code-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    padding: 10px 0;
+}
 
-        input[type="password"] {
-            flex: 1;
-            border: none;
-            background: transparent;
-            color: #ffffff;
-            font-size: 18px;
-            outline: none;
-            padding: 10px 0;
-        }
+#code-input::placeholder {
+    color: #5c344c;
+}
 
-        input[type="password"]::placeholder {
-            color: #5c344c;
-        }
+.submit-btn,
+.terminal-open-btn {
+    background: #3d0e28;
+    color: white;
+    border: 1px solid #6b1847;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .2s;
+}
 
-        .submit-btn {
-            background-color: #3d0e28;
-            color: #ffffff;
-            border: 1px solid #6b1847;
-            padding: 10px 25px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
+.submit-btn {
+    padding: 10px 25px;
+    font-size: 15px;
+}
 
-        .submit-btn:hover {
-            background-color: #b52b75;
-            border-color: #e63994;
-        }
+.submit-btn:hover,
+.terminal-open-btn:hover {
+    background: #b52b75;
+    border-color: #e63994;
+}
 
-        #error-msg {
-            color: #ff4d79;
-            margin-top: 20px;
-            font-size: 14px;
-            height: 20px;
-            font-weight: 500;
-        }
-    </style>
+#error-msg {
+    color: #ff4d79;
+    margin-top: 18px;
+    min-height: 20px;
+    font-size: 14px;
+}
+
+/* =========================
+   USER ID
+========================= */
+
+.user-id {
+    margin-top: 18px;
+    color: #70445d;
+    font-size: 11px;
+    user-select: all;
+}
+
+/* =========================
+   PROTECTED PAGE
+========================= */
+
+#protected-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+}
+
+/* =========================
+   TERMINAL BUTTON
+========================= */
+
+#terminal-button {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 100;
+    display: none;
+}
+
+.terminal-open-btn {
+    padding: 10px 16px;
+}
+
+/* =========================
+   TERMINAL
+========================= */
+
+#terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    background: rgba(4, 0, 3, .75);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+
+#terminal {
+    width: min(900px, calc(100% - 30px));
+    height: min(600px, calc(100% - 30px));
+    background: #080408;
+    border: 1px solid #4d1740;
+    border-radius: 10px;
+    box-shadow: 0 25px 80px rgba(0,0,0,.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-header {
+    height: 42px;
+    background: #210414;
+    border-bottom: 1px solid #3d0a27;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.terminal-close {
+    background: none;
+    border: none;
+    color: #c99cb3;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#terminal-output {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    color: #d8b5ca;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.terminal-input-row {
+    display: flex;
+    padding: 12px 16px;
+    border-top: 1px solid #301027;
+}
+
+.prompt {
+    color: #e63994;
+    font-family: Consolas, monospace;
+    padding-right: 8px;
+}
+
+#terminal-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+/* =========================
+   SETUP
+========================= */
+
+#setup-note {
+    display: none;
+    max-width: 600px;
+    margin-top: 20px;
+    color: #9e7189;
+    font-size: 12px;
+}
+</style>
 </head>
+
 <body>
 
-    <div id="ui-wrapper">
-        <!-- Korona Sidebar Element -->
-        <div class="sidebar">
-            <div class="brand-title">korona</div>
-            <div class="nav-item">Home</div>
-            <div class="nav-item">Games</div>
-            <div class="nav-item">Apps</div>
-            <div class="nav-item active">Browser</div>
-            <div class="nav-item">Settings</div>
-            <div class="nav-item">Account</div>
-        </div>
+<div id="browser">
 
-        <!-- Right Side Panel Contents -->
-        <div class="main-panel">
-            <!-- Navigation Header Bar -->
-            <div class="browser-header">
-                <div class="tab">🔒 Verification Required</div>
-                <div class="address-bar-container" id="address-bar">
-                    korona://authentication-gate
-                </div>
-            </div>
+    <div class="browser-header">
+        <div class="tab">🔒 Korona Browser</div>
 
-            <!-- Central Target Viewport -->
-            <div class="content-container">
-                
-                <!-- Korona Lookalike Authentication Screen -->
-                <div id="auth-container">
-                    <div class="logo-text">korona</div>
-                    <div class="sub-tagline">enter credentials to unlock page</div>
-                    
-                    <div class="input-wrapper">
-                        <input type="password" id="code-input" placeholder="Enter Authentication Code..." onkeydown="if(event.key === 'Enter') checkCode()">
-                        <button class="submit-btn" onclick="checkCode()">Go →</button>
-                    </div>
-                    <div id="error-msg"></div>
-                </div>
-
-                <!-- Protected Dynamic Iframe Element with Mouse Lock Access -->
-                <iframe 
-                    id="protected-iframe" 
-                    src="https://googleapis.com" 
-                    sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms"
-                    allow="pointer-lock">
-                </iframe>
-
-            </div>
+        <div class="address-bar" id="address-bar">
+            korona://authentication-gate
         </div>
     </div>
 
-    <script>
+    <div class="content">
 
-        const CORRECT_CODE = "FERNISBETTER"; 
-        const COOKIE_NAME = "korona_auth_token";
+        <!-- AUTHENTICATION -->
+        <div id="auth-container">
 
-        // Cookie Utility Helper Functions
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Strict";
+            <div class="logo">korona</div>
+
+            <div class="tagline">
+                enter credentials to unlock page
+            </div>
+
+            <div class="input-wrapper">
+                <input
+                    id="code-input"
+                    type="password"
+                    autocomplete="off"
+                    placeholder="Enter Authentication Code..."
+                >
+
+                <button
+                    class="submit-btn"
+                    onclick="checkAccess()"
+                >
+                    Go →
+                </button>
+            </div>
+
+            <div id="error-msg"></div>
+
+            <div class="user-id">
+                Your Korona ID:
+                <strong id="display-user-id"></strong>
+            </div>
+
+            <div id="setup-note">
+                Keep this ID available for the administrator.
+                It identifies this installation.
+            </div>
+
+        </div>
+
+        <!-- PROTECTED CONTENT -->
+        <iframe
+            id="protected-iframe"
+            src="https://storage.googleapis.com/mathhw/practice.html"
+            sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms"
+            allow="pointer-lock">
+        </iframe>
+
+    </div>
+</div>
+
+
+<!-- TERMINAL BUTTON -->
+<div id="terminal-button">
+    <button
+        class="terminal-open-btn"
+        onclick="openTerminal()">
+        Terminal
+    </button>
+</div>
+
+
+<!-- TERMINAL -->
+<div id="terminal-overlay">
+
+    <div id="terminal">
+
+        <div class="terminal-header">
+            <span>korona-admin-terminal</span>
+
+            <button
+                class="terminal-close"
+                onclick="closeTerminal()">
+                ×
+            </button>
+        </div>
+
+        <div id="terminal-output"></div>
+
+        <div class="terminal-input-row">
+            <span class="prompt">korona&gt;</span>
+
+            <input
+                id="terminal-input"
+                autocomplete="off"
+                spellcheck="false"
+            >
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+/*
+=========================================================
+CONFIGURATION
+=========================================================
+*/
+
+const CONFIG = {
+
+    /*
+     * Your remote authorization API.
+     *
+     * Example:
+     *
+     * https://your-domain.com/api/korona
+     *
+     * The API should implement:
+     *
+     * GET  /users
+     * POST /check
+     * POST /revoke
+     *
+     * See the API contract below.
+     */
+    API_URL: "https://YOUR-AUTH-SERVER.example/api/korona",
+
+    /*
+     * Protected page.
+     */
+    PROTECTED_URL:
+        "https://storage.googleapis.com/mathhw/practice.html"
+};
+
+
+/*
+=========================================================
+USER ID
+=========================================================
+*/
+
+const USER_ID_KEY = "korona_user_id";
+
+function generateUserId() {
+
+    if (crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+
+    return (
+        "KRN-" +
+        Date.now().toString(36) +
+        "-" +
+        Math.random().toString(36).substring(2, 10)
+    ).toUpperCase();
+}
+
+
+function getUserId() {
+
+    let id = localStorage.getItem(USER_ID_KEY);
+
+    if (!id) {
+        id = generateUserId();
+        localStorage.setItem(USER_ID_KEY, id);
+    }
+
+    return id;
+}
+
+
+const USER_ID = getUserId();
+
+document.getElementById("display-user-id").textContent = USER_ID;
+
+
+/*
+=========================================================
+REMOTE ACCESS CHECK
+=========================================================
+*/
+
+async function checkRemoteAccess(code) {
+
+    const response = await fetch(
+        CONFIG.API_URL + "/check",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                userId: USER_ID,
+                code: code
+            })
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Authorization server unavailable.");
+    }
+
+    return await response.json();
+}
+
+
+/*
+=========================================================
+LOGIN
+=========================================================
+*/
+
+async function checkAccess() {
+
+    const input = document.getElementById("code-input");
+    const error = document.getElementById("error-msg");
+
+    const code = input.value.trim();
+
+    if (!code) {
+        error.textContent = "Enter an authentication code.";
+        return;
+    }
+
+    error.textContent = "Checking authorization...";
+
+    try {
+
+        const result = await checkRemoteAccess(code);
+
+        if (result.authorized === true) {
+
+            localStorage.setItem(
+                "korona_session",
+                result.sessionToken || "authorized"
+            );
+
+            unlockPage();
+
+        } else {
+
+            error.textContent =
+                result.message ||
+                "Access denied.";
+
+            input.value = "";
+            input.focus();
         }
 
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    } catch (err) {
+
+        console.error(err);
+
+        error.textContent =
+            "Unable to contact authorization server.";
+    }
+}
+
+
+/*
+=========================================================
+UNLOCK
+=========================================================
+*/
+
+function unlockPage() {
+
+    document.getElementById("auth-container").style.display =
+        "none";
+
+    const iframe =
+        document.getElementById("protected-iframe");
+
+    iframe.style.display = "block";
+
+    document.getElementById("address-bar").textContent =
+        CONFIG.PROTECTED_URL;
+}
+
+
+/*
+=========================================================
+TERMINAL
+=========================================================
+*/
+
+function openTerminal() {
+
+    document.getElementById("terminal-overlay")
+        .style.display = "flex";
+
+    document.getElementById("terminal-input")
+        .focus();
+
+    terminalPrint(
+        "Korona administrative terminal\n" +
+        "Type 'help' for commands.\n"
+    );
+}
+
+
+function closeTerminal() {
+
+    document.getElementById("terminal-overlay")
+        .style.display = "none";
+}
+
+
+function terminalPrint(text) {
+
+    const output =
+        document.getElementById("terminal-output");
+
+    output.textContent += text + "\n";
+
+    output.scrollTop = output.scrollHeight;
+}
+
+
+/*
+=========================================================
+TERMINAL COMMANDS
+=========================================================
+*/
+
+async function runTerminalCommand(command) {
+
+    const parts = command.trim().split(/\s+/);
+
+    const cmd = parts[0].toLowerCase();
+
+    if (!cmd) return;
+
+
+    if (cmd === "help") {
+
+        terminalPrint(
+`Available commands:
+
+users
+    Show registered user IDs.
+
+user <ID>
+    Show information about a user.
+
+revoke <ID>
+    Remotely revoke a user's access.
+
+restore <ID>
+    Restore a revoked user.
+
+check <ID>
+    Check whether a user is active.
+
+clear
+    Clear terminal.
+
+close
+    Close terminal.`
+        );
+
+        return;
+    }
+
+
+    if (cmd === "clear") {
+
+        document.getElementById("terminal-output")
+            .textContent = "";
+
+        return;
+    }
+
+
+    if (cmd === "close") {
+
+        closeTerminal();
+        return;
+    }
+
+
+    /*
+     * LIST USERS
+     */
+
+    if (cmd === "users") {
+
+        terminalPrint("Loading users...");
+
+        try {
+
+            const response = await fetch(
+                CONFIG.API_URL + "/users"
+            );
+
+            if (!response.ok)
+                throw new Error("Request failed.");
+
+            const data = await response.json();
+
+            if (!data.users || !data.users.length) {
+
+                terminalPrint("No users found.");
+                return;
             }
-            return null;
+
+            let output = "\n";
+
+            for (const user of data.users) {
+
+                output +=
+                    `${user.id} | ` +
+                    `${user.active ? "ACTIVE" : "REVOKED"}` +
+                    (user.name ? ` | ${user.name}` : "") +
+                    "\n";
+            }
+
+            terminalPrint(output);
+
+        } catch (err) {
+
+            terminalPrint(
+                "ERROR: " + err.message
+            );
         }
 
-        // Run validation layout toggles
-        function unlockPage() {
-            document.getElementById("auth-container").style.display = "none";
-            
-            // Un-nest the layout wrappers so iframe occupies 100% full screen
-            const iframe = document.getElementById("protected-iframe");
-            document.body.appendChild(iframe);
-            iframe.style.display = "block";
-            
-            // Remove parent interface frameworks
-            document.getElementById("ui-wrapper").remove();
+        return;
+    }
+
+
+    /*
+     * USER
+     */
+
+    if (cmd === "user") {
+
+        const id = parts[1];
+
+        if (!id) {
+            terminalPrint("Usage: user <ID>");
+            return;
         }
 
-        function checkCode() {
-            const inputField = document.getElementById("code-input");
-            const errorMessage = document.getElementById("error-msg");
+        try {
 
-            if (inputField.value === CORRECT_CODE) {
-                // Save string code configuration into cookies valid for 7 days
-                setCookie(COOKIE_NAME, inputField.value, 7);
-                unlockPage();
-            } else {
-                errorMessage.textContent = "Access Denied. Incorrect verification token.";
-                inputField.value = "";
-                inputField.focus();
+            const response = await fetch(
+                CONFIG.API_URL +
+                "/users/" +
+                encodeURIComponent(id)
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+
+                terminalPrint(
+                    data.message || "User not found."
+                );
+
+                return;
             }
+
+            terminalPrint(
+                JSON.stringify(data, null, 2)
+            );
+
+        } catch (err) {
+
+            terminalPrint(
+                "ERROR: " + err.message
+            );
         }
 
-        // On initialization load, verify if valid session cookie exists
-        window.onload = function() {
-            const savedCode = getCookie(COOKIE_NAME);
-            if (savedCode === CORRECT_CODE) {
-                unlockPage();
+        return;
+    }
+
+
+    /*
+     * REVOKE
+     */
+
+    if (cmd === "revoke") {
+
+        const id = parts[1];
+
+        if (!id) {
+
+            terminalPrint(
+                "Usage: revoke <ID>"
+            );
+
+            return;
+        }
+
+        if (!confirm(
+            "Revoke access for " + id + "?"
+        )) {
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                CONFIG.API_URL + "/revoke",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        userId: id
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            terminalPrint(
+                data.message ||
+                (response.ok
+                    ? "User revoked."
+                    : "Revoke failed.")
+            );
+
+        } catch (err) {
+
+            terminalPrint(
+                "ERROR: " + err.message
+            );
+        }
+
+        return;
+    }
+
+
+    /*
+     * RESTORE
+     */
+
+    if (cmd === "restore") {
+
+        const id = parts[1];
+
+        if (!id) {
+
+            terminalPrint(
+                "Usage: restore <ID>"
+            );
+
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                CONFIG.API_URL + "/restore",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        userId: id
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            terminalPrint(
+                data.message ||
+                (response.ok
+                    ? "User restored."
+                    : "Restore failed.")
+            );
+
+        } catch (err) {
+
+            terminalPrint(
+                "ERROR: " + err.message
+            );
+        }
+
+        return;
+    }
+
+
+    /*
+     * CHECK
+     */
+
+    if (cmd === "check") {
+
+        const id = parts[1];
+
+        if (!id) {
+
+            terminalPrint(
+                "Usage: check <ID>"
+            );
+
+            return;
+        }
+
+        try {
+
+            const response = await fetch(
+                CONFIG.API_URL +
+                "/users/" +
+                encodeURIComponent(id)
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+
+                terminalPrint(
+                    "User not found."
+                );
+
+                return;
             }
-        };
-    </script>
+
+            terminalPrint(
+                `${id}: ` +
+                (data.active
+                    ? "ACTIVE"
+                    : "REVOKED")
+            );
+
+        } catch (err) {
+
+            terminalPrint(
+                "ERROR: " + err.message
+            );
+        }
+
+        return;
+    }
+
+
+    terminalPrint(
+        "Unknown command. Type 'help'."
+    );
+}
+
+
+/*
+=========================================================
+KEYBOARD HANDLERS
+=========================================================
+*/
+
+document
+    .getElementById("code-input")
+    .addEventListener("keydown", event => {
+
+        if (event.key === "Enter") {
+            checkAccess();
+        }
+    });
+
+
+document
+    .getElementById("terminal-input")
+    .addEventListener("keydown", event => {
+
+        if (event.key === "Enter") {
+
+            const input = event.target;
+            const command = input.value;
+
+            terminalPrint(
+                "korona> " + command
+            );
+
+            input.value = "";
+
+            runTerminalCommand(command);
+        }
+    });
+
+
+/*
+ * CTRL+\ OPENS TERMINAL
+ */
+
+document.addEventListener("keydown", event => {
+
+    if (
+        event.ctrlKey &&
+        event.key === "\\"
+    ) {
+
+        event.preventDefault();
+
+        openTerminal();
+    }
+});
+
+
+/*
+=========================================================
+INITIALIZATION
+=========================================================
+*/
+
+window.addEventListener("load", () => {
+
+    document.getElementById("setup-note")
+        .style.display = "block";
+
+    /*
+     * The page deliberately does NOT automatically
+     * trust an old "authorized" localStorage value.
+     *
+     * Remote authorization should be checked whenever
+     * the user attempts to enter.
+     */
+});
+</script>
+
 </body>
 </html>
